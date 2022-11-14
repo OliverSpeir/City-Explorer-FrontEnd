@@ -8,7 +8,7 @@
 
 ## Getting Started
 - This app will be deployed live on netlify 
-- If they want to make a local version of it they will need to install node.js, npm, react and axios then clone the repository. They will then need to create a location IQ account and edit their AQI key into the code, they then will need to create a .env file that is in the same location as the gitignore in the repository. They will need to make a REACT_APP_LOCATIONIQ_KEY variable and make that variable equal their api key. 
+- If they want to make a local version of it they will need to install node.js, npm, react and axios then clone the repository. They will then need to create a location IQ account and edit their AQI key into the code, they then will need to create a .env file that is in the same location as the gitignore in the repository. They will need to make a REACT_APP_LOCATIONIQ_API_KEY variable and make that variable equal their api key. 
 
 ## Architecture
 - This App uses axios to make api calls to LOCATIONIQ server based on the user input city 
