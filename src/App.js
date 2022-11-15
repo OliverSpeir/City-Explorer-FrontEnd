@@ -52,8 +52,8 @@ render() {
           <Form.Label>Search for any City</Form.Label>
           <Form.Control autoFocus type="text" placeholder="e.g. Seattle" onChange ={this.handleChange}/>
         </Form.Group>
+        <Button type ="submit" id="abc">Explore!</Button>
       </Form>
-      <Button type ="submit" id="abc">Explore!</Button>
       {
           this.state.isError
             ? <Alert variant="danger">{this.state.errorMessage}</Alert>
