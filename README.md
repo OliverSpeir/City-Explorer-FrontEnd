@@ -31,6 +31,17 @@
 #### Estimate of time needed to complete: 1 hour
 #### Start time: 4pm
 
-#### Finish time: 6pm
+#### Finish time: 6.30pm
 
 #### Actual time needed to complete: 2
+
+### FEATURE TIME ESTIMATES: 
+
+#### Name of feature: CSS 
+
+#### Estimate of time needed to complete: .5 hours
+#### Start time: 6.30pm
+
+#### Finish time: 7.30pm
+
+#### Actual time needed to complete: 1
