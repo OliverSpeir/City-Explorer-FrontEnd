@@ -66,7 +66,7 @@ render() {
               </>
       }
       {
-        this.state.lon != ''
+        this.state.lon !== ''
          ?
               <>        
               <DisplayMap
