@@ -1,6 +1,6 @@
 # City Explorer
-## **Author**: Oliver Speir 
-## **Version**: 1.0.2 (increment the patch/fix version number if you make more commits past your first submission)
+- **Author**: Oliver Speir 
+- **Version**: 1.0.2 
 
 ## Overview
 - This website will allow the user to enter a city and receive an image of the city 
