@@ -26,12 +26,11 @@
 
 ### FEATURE TIME ESTIMATES: 
 
-#### Name of feature: ________________________________
+#### Name of feature: Display Map 
 
-#### Estimate of time needed to complete: _____
+#### Estimate of time needed to complete: 1 hour
+#### Start time: 4pm
 
-#### Start time: _____
+#### Finish time: 6pm
 
-#### Finish time: _____
-
-#### Actual time needed to complete: _____
+#### Actual time needed to complete: 2
