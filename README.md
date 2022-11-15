@@ -1,7 +1,6 @@
 # City Explorer
-### https://city-explorer11.netlify.app/
 **Author**: Oliver Speir 
-**Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
+**Version**: 1.0.2 (increment the patch/fix version number if you make more commits past your first submission)
 
 ## Overview
 - This website will allow the user to enter a city and receive an image of the city 
@@ -15,8 +14,8 @@
 - The app then gathers the long and lat of that city and makes another request to the LOCATIONIQ server for an image of a map
 - The app then displays that image
 ## Change Log
-- Initial Commit 
-
+- 1.0.0 Initial Commit 
+- 1.0.2 Added Search form that desplays long lat and map along with minor CSS
 
 ## Credit and Collaborations
 - WRRC diagram made with Ricardo Soto 
