@@ -14,7 +14,8 @@ class App extends React.Component {
       lon: '',
       lat: '',
       isError: false,
-      city: ''
+      city: '',
+      weather: []
     }
   }
 
@@ -22,6 +23,7 @@ handleSubmit = async (e) => {
   try {
     e.preventDefault();
     let cityInfo = await axios.get(`https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.input}&format=json`);
+    //console.log(cityInfo);
     this.setState({
       lon: cityInfo.data[0].lon,
       lat: cityInfo.data[0].lat,
@@ -31,7 +33,22 @@ handleSubmit = async (e) => {
   } catch (error){
     this.setState ({
       errorMessage: error.message,
-      isError: true
+      isError: true 
+    });
+  }
+}
+handleWeather = async (e) => {
+  try {
+    e.preventDefault();
+    let weatherResp = await axios.get(`${process.env.REACT_APP_SERVER}/weather?${this.state.city}`);
+    //console.log(weatherResp);
+    this.setState({
+      weather: weatherResp.data
+    });
+  } catch (error){
+    this.setState ({
+      errorMessage: error.message,
+      isError: true 
     });
   }
 }
@@ -54,6 +71,7 @@ render() {
         </Form.Group>
         <Button type ="submit" id="abc">Explore!</Button>
       </Form>
+      <Button onClick= {this.handleWeather}>Get Weather</Button>
       {
           this.state.isError
             ? <Alert variant="danger">{this.state.errorMessage}</Alert>
@@ -73,11 +91,17 @@ render() {
               long = {this.state.lon}
               lat = {this.state.lat}
               />
+              {/* <p> {this.state.weather}</p> */}
               </>
             :
             <p></p>
       }
-    
+    {this.state.weather.map(day => (
+      <>
+      <h3>{day.date}</h3>
+      <p>{day.description}</p>
+      </>
+    ))}
     
     </>
 

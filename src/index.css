@@ -25,7 +25,7 @@ code {
 }
 
 #abc {
-  position: absolute;
+  position: flex;
   left:47%;
 }
 
@@ -36,4 +36,8 @@ h1 {
 h2 {
   margin-top: 150px;
   margin-left: 40px;
+}
+
+#efg {
+  position:flex;
 }
