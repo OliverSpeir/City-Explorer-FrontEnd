@@ -15,7 +15,8 @@ class App extends React.Component {
       lat: '',
       isError: false,
       city: '',
-      weather: []
+      weather: [],
+      isCity: false
     }
   }
 
@@ -23,13 +24,14 @@ handleSubmit = async (e) => {
   try {
     e.preventDefault();
     let cityInfo = await axios.get(`https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.input}&format=json`);
-    //console.log(cityInfo);
     this.setState({
       lon: cityInfo.data[0].lon,
       lat: cityInfo.data[0].lat,
       city: cityInfo.data[0].display_name,
-      isError: false
+      isError: false,
+      isCity: true
     });
+    this.handleWeather();
   } catch (error){
     this.setState ({
       errorMessage: error.message,
@@ -37,11 +39,11 @@ handleSubmit = async (e) => {
     });
   }
 }
-handleWeather = async (e) => {
+handleWeather = async () => {
   try {
-    e.preventDefault();
-    let weatherResp = await axios.get(`${process.env.REACT_APP_SERVER}/weather?${this.state.city}`);
-    //console.log(weatherResp);
+    console.log(this.state.input)
+    let weatherResp = await axios.get(`${process.env.REACT_APP_SERVER}/weather?cityName=${this.state.input}`);
+    console.log(weatherResp.data);
     this.setState({
       weather: weatherResp.data
     });
@@ -64,14 +66,14 @@ render() {
   return (
     <>
       <h1>City Explorer</h1>
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit= {this.handleSubmit}>
         <Form.Group>
           <Form.Label>Search for any City</Form.Label>
           <Form.Control autoFocus type="text" placeholder="e.g. Seattle" onChange ={this.handleChange}/>
         </Form.Group>
         <Button type ="submit" id="abc">Explore!</Button>
       </Form>
-      <Button onClick= {this.handleWeather}>Get Weather</Button>
+      {/* <Button onClick= {this.handleWeather}>Get Weather</Button> */}
       {
           this.state.isError
             ? <Alert variant="danger">{this.state.errorMessage}</Alert>
@@ -81,6 +83,7 @@ render() {
                 lat = {this.state.lat}
                 name = {this.state.city}
               />
+            {/* {this.handleWeather}; */}
               </>
       }
       {
@@ -91,7 +94,6 @@ render() {
               long = {this.state.lon}
               lat = {this.state.lat}
               />
-              {/* <p> {this.state.weather}</p> */}
               </>
             :
             <p></p>
