@@ -1,5 +1,4 @@
 import React from 'react'
-import Image from 'react-bootstrap/Image'
 import Container from 'react-bootstrap/Container'
 
 class DisplayWeather extends React.Component {

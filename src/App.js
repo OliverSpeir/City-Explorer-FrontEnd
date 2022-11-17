@@ -67,7 +67,6 @@ handleChange = e => {
 };
 
 render() {
-  let movieUrl= "https://image.tmdb.org/t/p/original/"
   return (
     <>
       <h1>City Explorer</h1>
