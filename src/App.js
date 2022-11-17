@@ -44,8 +44,6 @@ handleSubmit = async (e) => {
 }
 handleWeather = async () => {
   try {
-    console.log(this.state.input);
-    //console.log(this.state.lat);
     let weatherResp = await axios.get(`${process.env.REACT_APP_SERVER}/weather?cityName=${this.state.input}`)
     let movieResp = await axios.get(`${process.env.REACT_APP_SERVER}/movies?cityName=${this.state.input}`)
     this.setState({
@@ -77,7 +75,6 @@ render() {
         </Form.Group>
         <Button type ="submit" id="abc">Explore!</Button>
       </Form>
-      {/* <Button onClick= {this.handleWeather}>Get Weather</Button> */}
       {
           this.state.isError
             ? <Alert variant="danger">{this.state.errorMessage}</Alert>
@@ -87,7 +84,6 @@ render() {
                 lat = {this.state.lat}
                 name = {this.state.city}
               />
-            {/* {this.handleWeather}; */}
               </>
       }
       {
