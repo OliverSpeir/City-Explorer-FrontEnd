@@ -22,6 +22,8 @@
 
 ## WRRC diagram :
 - https://i.imgur.com/ERizwRa.png
+- from lab 8: 
+- https://i.imgur.com/dmlwdNT.png
 
 ### FEATURE TIME ESTIMATES: 
 
