@@ -5,6 +5,8 @@ import axios from 'axios';
 import CityResults from './CityResults.js';
 import DisplayMap from './DisplayMap';
 import Alert from 'react-bootstrap/Alert'
+import DisplayPoster from './DisplayPoster.js'
+import DisplayWeather from './DisplayWeather.js'
 
 class App extends React.Component {
   constructor (props){
@@ -16,7 +18,8 @@ class App extends React.Component {
       isError: false,
       city: '',
       weather: [],
-      isCity: false
+      isCity: false,
+      movies: []
     }
   }
 
@@ -24,14 +27,14 @@ handleSubmit = async (e) => {
   try {
     e.preventDefault();
     let cityInfo = await axios.get(`https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.input}&format=json`);
-    this.setState({
+     this.setState({
       lon: cityInfo.data[0].lon,
       lat: cityInfo.data[0].lat,
       city: cityInfo.data[0].display_name,
       isError: false,
       isCity: true
     });
-    this.handleWeather();
+    await this.handleWeather();
   } catch (error){
     this.setState ({
       errorMessage: error.message,
@@ -41,11 +44,13 @@ handleSubmit = async (e) => {
 }
 handleWeather = async () => {
   try {
-    console.log(this.state.input)
-    let weatherResp = await axios.get(`${process.env.REACT_APP_SERVER}/weather?cityName=${this.state.input}`);
-    console.log(weatherResp.data);
+    console.log(this.state.input);
+    //console.log(this.state.lat);
+    let weatherResp = await axios.get(`${process.env.REACT_APP_SERVER}/weather?cityName=${this.state.input}`)
+    let movieResp = await axios.get(`${process.env.REACT_APP_SERVER}/movies?cityName=${this.state.input}`)
     this.setState({
-      weather: weatherResp.data
+      weather: weatherResp.data,
+      movies: movieResp.data
     });
   } catch (error){
     this.setState ({
@@ -62,7 +67,7 @@ handleChange = e => {
 };
 
 render() {
-
+  let movieUrl= "https://image.tmdb.org/t/p/original/"
   return (
     <>
       <h1>City Explorer</h1>
@@ -99,10 +104,10 @@ render() {
             <p></p>
       }
     {this.state.weather.map(day => (
-      <>
-      <h3>{day.date}</h3>
-      <p>{day.description}</p>
-      </>
+      <DisplayWeather date = {day.date} description = {day.description} />
+    ))}
+        {this.state.movies.map(data => (
+      <DisplayPoster title = {data.title} poster = {data.poster}/>
     ))}
     
     </>
