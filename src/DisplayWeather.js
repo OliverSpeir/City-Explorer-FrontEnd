@@ -6,13 +6,17 @@ class DisplayWeather extends React.Component {
         return (
             <>
         <Container>
-         <h3>{this.props.date}</h3>
-         <p>{this.props.description}</p>
+            {this.props.data.map((x) => (
+                <>
+                <p> Date: {x.date}</p>
+                <p> High : {x.max} Low : {x.min}</p>
+                <p> Description: {x.description} </p>
+                </>
+            ))} 
          </Container>
             </>
         )
     }
-
 }
 
 export default DisplayWeather

@@ -1,12 +1,11 @@
 import React from 'react';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import CityResults from './CityResults.js';
 import DisplayMap from './DisplayMap';
 import Alert from 'react-bootstrap/Alert'
 import DisplayPoster from './DisplayPoster.js'
 import DisplayWeather from './DisplayWeather.js'
+import InputForm from './InputForm.js'
 
 class App extends React.Component {
   constructor (props){
@@ -66,57 +65,17 @@ handleChange = e => {
 
 render() {
   return (
-    <>
+  <>
       <h1>City Explorer</h1>
-      <Form onSubmit= {this.handleSubmit}>
-        <Form.Group>
-          <Form.Label>Search for any City</Form.Label>
-          <Form.Control autoFocus type="text" placeholder="e.g. Seattle" onChange ={this.handleChange}/>
-        </Form.Group>
-        <Button type ="submit" id="abc">Explore!</Button>
-      </Form>
-      {
-          this.state.isError
-            ? <Alert variant="danger">{this.state.errorMessage}</Alert>
-            : <>
-              <CityResults
-                long = {this.state.lon}
-                lat = {this.state.lat}
-                name = {this.state.city}
-              />
-              </>
-      }
-      {
-        this.state.lon !== ''
-         ?
-              <>        
-              <DisplayMap
-              long = {this.state.lon}
-              lat = {this.state.lat}
-              />
-              </>
-            :
-            <p></p>
-      }
-    {this.state.weather.map(day => (
-      <DisplayWeather date = {day.date} description = {day.description} />
-    ))}
-        {this.state.movies.map(data => (
-      <DisplayPoster title = {data.title} poster = {data.poster}/>
-    ))}
-    
-    </>
-
-
+      <InputForm handleChange = {this.handleChange} handleSubmit = {this.handleSubmit}/>
+      {this.state.isError ? 
+      <Alert variant="danger">{this.state.errorMessage}</Alert> : 
+      <CityResults long = {this.state.lon} lat = {this.state.lat} name = {this.state.city}/>}
+      {this.state.lon !== ''?<><DisplayMap long = {this.state.lon} lat = {this.state.lat}/> </> : <p></p>}
+      <DisplayWeather data = {this.state.weather}/> 
+      <DisplayPoster data = {this.state.movies}/>       
+  </>
   )
-
-
-
-
 }
-
-
 }
-
-
 export default App;
