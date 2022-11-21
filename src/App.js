@@ -26,14 +26,16 @@ class App extends React.Component {
     try {
       e.preventDefault();
       let cityInfo = await axios.get(`https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.input}&format=json`);
-      this.setState({
+      let lon = cityInfo.data[0].lon;
+      let lat = cityInfo.data[0].lat;
+       this.setState({
         lon: cityInfo.data[0].lon,
         lat: cityInfo.data[0].lat,
         city: cityInfo.data[0].display_name,
         isError: false,
         isCity: true
       });
-      await this.handleWeather();
+      this.handleWeather(lat,lon);
     } catch (error) {
       this.setState({
         errorMessage: error.message,
@@ -41,14 +43,17 @@ class App extends React.Component {
       });
     }
   }
-  handleWeather = async () => {
+  handleWeather = async (lat,lon) => {
     try {
-      let weatherResp = await axios.get(`${process.env.REACT_APP_SERVER}/weather?cityName=${this.state.input}`)
-      let movieResp = await axios.get(`${process.env.REACT_APP_SERVER}/movies?cityName=${this.state.input}`)
+      console.log(lat);
+      console.log(lon);
+      let weatherResp = await axios.get(`${process.env.REACT_APP_SERVER}/weather?lat=${lat}&lon=${lon}`)
+      let movieResp = await axios.get(`${process.env.REACT_APP_SERVER}/movie?cityName=${this.state.input}`)
       this.setState({
         weather: weatherResp.data,
         movies: movieResp.data
       });
+      console.log(weatherResp.data);
     } catch (error) {
       this.setState({
         errorMessage: error.message,
